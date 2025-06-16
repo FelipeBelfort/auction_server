@@ -14,7 +14,7 @@ run:
 start: build run
 
 dev: build
-	docker run -it \
+	docker run -it --rm\
 		--name $(CONTAINER_NAME)\
 		-p $(PORT):$(PORT) \
 		--env-file .env \
