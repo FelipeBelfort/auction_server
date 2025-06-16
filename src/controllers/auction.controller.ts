@@ -15,7 +15,7 @@ export const login = (req: Request, res: Response) => {
 export const postBid = (req: Request, res: Response) => {
   const itemID = parseInt(req.params.itemID);
   const sessionKey = req.query.sessionKey as string;
-  const bidAmount = parseFloat(req.body.bid);
+  const bidAmount = parseFloat(req.body);
 
   if (!sessionKey) return res.status(400).send('Missing sessionKey');
   const userID = sessionService.validate(sessionKey);
