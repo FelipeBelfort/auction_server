@@ -1,26 +1,24 @@
 import { BidMap, Bid } from '../types';
+import { BidService } from './bids.service';
 
 export class AuctionService {
   private bids: BidMap = new Map();
 
   postBid(itemID: number, bid: Bid) {
-    const itemBids = this.bids.get(itemID) || [];
+    let itemBids = this.bids.get(itemID);
 
-    const existing = itemBids.find(b => b.userID === bid.userID);
-    if (existing) {
-      if (bid.amount > existing.amount) {
-        existing.amount = bid.amount;
-      }
-    } else {
-      itemBids.push(bid);
+    if (!itemBids) {
+      itemBids = new BidService();
+      this.bids.set(itemID, itemBids);
     }
-
-    const sorted = itemBids.sort((a, b) => b.amount - a.amount).slice(0, 15);
-    this.bids.set(itemID, sorted);
+    itemBids.pushBid(bid);
   }
 
   getTopBids(itemID: number): { [userID: string]: string }[] {
-    const itemBids = this.bids.get(itemID) || [];
-    return itemBids.map(b => ({ [b.userID]: b.amount.toString() }));
+    const itemBids = this.bids.get(itemID);
+    if (itemBids) {
+      return itemBids.getTopBids().map(b => ({ [b.userID]: b.amount.toString() }));
+    }
+    return [];
   }
 }

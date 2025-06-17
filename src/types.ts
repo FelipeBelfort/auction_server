@@ -1,9 +1,11 @@
+import { BidService } from "./services/bids.service";
+
 export interface Bid {
   userID: number;
   amount: number;
 }
 
-export type BidMap = Map<number, Bid[]>;
+export type BidMap = Map<number, BidService>;
 
 export interface Session {
   userID: number;
