@@ -33,6 +33,6 @@ describe('AuctionService', () => {
   });
 
   it('should return empty list for item with no bids', () => {
-    expect(service.getTopBids(99)).toEqual([]);
+    expect(service.getTopBids(99)).toEqual("");
   });
 });

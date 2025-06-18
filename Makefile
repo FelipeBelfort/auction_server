@@ -13,6 +13,9 @@ run:
 
 start: build run
 
+test:
+	npm test
+
 dev: build
 	docker run -it --rm\
 		--name $(CONTAINER_NAME)\
@@ -37,4 +40,4 @@ rebuild:
 
 re: fclean all
 
-.PHONY: build run start shell clean fclean rebuild re
+.PHONY: build run start test shell clean fclean rebuild re

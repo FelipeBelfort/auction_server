@@ -14,11 +14,11 @@ export class AuctionService {
     itemBids.pushBid(bid);
   }
 
-  getTopBids(itemID: number): { [userID: string]: string }[] {
+  getTopBids(itemID: number): { [userID: string]: string }[] | string {
     const itemBids = this.bids.get(itemID);
     if (itemBids) {
       return itemBids.getTopBids().map(b => ({ [b.userID]: b.amount.toString() }));
     }
-    return [];
+    return "";
   }
 }

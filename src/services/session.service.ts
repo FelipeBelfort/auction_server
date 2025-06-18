@@ -41,7 +41,7 @@ export class SessionService {
     const now = Date.now();
     if (now - this.lastCleanup > CLEANUP_INTERVAL) {
       this.lastCleanup = now;
-      setTimeout(() => this.cleanupExpired(), 0);
+      setTimeout(() => this.cleanupExpired(), 1);
     }
   }
 
